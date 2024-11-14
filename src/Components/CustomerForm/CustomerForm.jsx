@@ -6,6 +6,7 @@ export default function CustomerForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
@@ -23,6 +24,7 @@ export default function CustomerForm() {
           setName(customer.name);
           setEmail(customer.email);
           setAddress(customer.address);
+          setPhone(customer.phone);
         } catch (error) {
           console.error("Error fetching customer:", error);
           setError("Failed to load customer data");
@@ -55,7 +57,8 @@ export default function CustomerForm() {
         body: JSON.stringify({
           name,
           email,
-          address
+          address,
+          phone
         })
       });
 
@@ -67,6 +70,7 @@ export default function CustomerForm() {
       setName("");
       setEmail("");
       setAddress("");
+      setPhone("");
       setError("");
 
       navigate("/customerList");
@@ -78,7 +82,7 @@ export default function CustomerForm() {
 
   return (
     <>
-      <h1>New Customer Form</h1>
+      <h1>{id ? 'Edit Customer' : 'New Customer'}</h1>
       {error && <p className="error">{error}</p>}
       <form>
         <label htmlFor="name">Name:</label>
@@ -87,7 +91,9 @@ export default function CustomerForm() {
         <input type="email" id="email" name="email" placeholder="Enter email" value={email} onChange={(e) => setEmail(e.target.value)} />
         <label htmlFor="address">Address:</label>
         <input type="text" id="address" name="address" placeholder="Enter address" value={address} onChange={(e) => setAddress(e.target.value)} />
-        <button type="submit" className="button-85" onClick={handleSubmit}>Submit</button>
+        <label htmlFor="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" placeholder="Enter phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
+        <button type="submit" className="button-85" onClick={handleSubmit}>{id ? 'Update Customer' : 'Submit'}</button>
       </form>
     </>
   );

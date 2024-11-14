@@ -119,13 +119,17 @@ export default function InvoiceList() {
   const formatDate = (dateString) => {
     if (!dateString) return '';
     
+    // Split the date string and create a new date using components
+    const [year, month, day] = dateString.split('-');
+    const date = new Date(year, month - 1, day);  // month is 0-based in JS
+    
     const options = { 
       year: 'numeric', 
       month: 'long', 
       day: 'numeric' 
     };
     
-    return new Date(dateString).toLocaleDateString('en-US', options);
+    return date.toLocaleDateString('en-US', options);
   };
 
   return (
@@ -177,6 +181,7 @@ export default function InvoiceList() {
                   <h2>{customer?.name}</h2>
                   <p><strong>Project Name:</strong> {invoice.projectName}</p>
                   <p><strong>Due Date:</strong> {formatDate(invoice.dueDate)}</p>
+                  <p><strong>Phone:</strong> {customer?.phone}</p>
                   <p><strong>Amount Due:</strong> ${invoice.total.toFixed(2)}</p>
                   <p><strong>Status:</strong> <span className={`${invoice.status}`}>{invoice.status.toUpperCase()}</span></p>
                 </div>

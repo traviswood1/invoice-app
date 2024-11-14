@@ -7,7 +7,8 @@ A simple invoice management system for local use.
 
 ## Quick Start
 1. Double-click `start.bat` (Windows) or `start.sh` (Mac/Linux)
-2. Open browser to http://localhost:5173
+2. Might need to run `chmod +x start.sh` if you get a permissions error
+3. Open browser to http://localhost:5173
 
 ## Manual Start
 1. Open terminal in this folder

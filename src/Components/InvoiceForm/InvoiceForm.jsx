@@ -30,6 +30,8 @@ export default function InvoiceForm() {
         const response = await fetch(`http://localhost:3000/invoices/${id}`);
         if (!response.ok) throw new Error('Failed to fetch invoice');
         const data = await response.json();
+        
+        // Just use the dates as they are stored
         setFormData(data);
       } catch (error) {
         console.error("Error fetching invoice:", error);
@@ -121,20 +123,33 @@ export default function InvoiceForm() {
     try {
       const invoiceData = {
         ...formData,
-        createdAt: new Date().toISOString(),
+        id: id || undefined,
+        createdAt: formData.createdAt || new Date().toISOString()
       };
 
-      const response = await fetch('http://localhost:3000/invoices', {
-        method: 'POST',
+      const url = id 
+        ? `http://localhost:3000/invoices/${id}` 
+        : 'http://localhost:3000/invoices';
+      
+      const method = id ? 'PUT' : 'POST';
+
+      const response = await fetch(url, {
+        method: method,
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(invoiceData)
       });
 
-      if (!response.ok) throw new Error(`Failed to ${id ? 'update' : 'create'} invoice`);
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Server response:', errorText);
+        throw new Error(`Failed to ${id ? 'update' : 'create'} invoice`);
+      }
       
-      // Navigate back to invoice list on success
+      const data = await response.json();
+      console.log('Success:', data);
+
       navigate('/invoiceList');
     } catch (error) {
       console.error("Error submitting invoice:", error);
@@ -338,10 +353,10 @@ export default function InvoiceForm() {
         <div className="invoice-header">
           <div className="invoice-header-text"> 
             <h2>INVOICE</h2>
-            <h3>McProperty Improvements</h3>
+            <h3>MC Property Improvements</h3>
             <p>Email: mcpropertiesia@gmail.com</p>
-            <p>Address: 2743 Fair Ln, Denison, IA</p>
-            <p>Phone: 712-210-2950</p>
+            <p>Address: 2743 Fair Ln, Denison, IA, 51442</p>
+            <p>Phone: 712-790-2950</p>
           </div>
           <div className="invoice-details">
             <p>
@@ -356,6 +371,7 @@ export default function InvoiceForm() {
           <h3>Bill To:</h3>
           <p>{customers.find(c => c.id === formData.customerId)?.name}</p>
           <p>{customers.find(c => c.id === formData.customerId)?.address}</p>
+          <p>{customers.find(c => c.id === formData.customerId)?.phone}</p>
         </div>
 
         <div className="project-section">

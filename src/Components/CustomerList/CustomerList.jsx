@@ -59,6 +59,7 @@ export default function CustomerList({ customerData }) {
                 <h2>{customer.name}</h2>
                 <p><strong>Email:</strong> {customer.email}</p>
                 <p><strong>Address:</strong> {customer.address}</p>
+                <p><strong>Phone:</strong> {customer.phone}</p>
               </div>
               <div className="customer-list-actions">
                 <button className="button-85" onClick={() => handleEdit(customer.id)}>
