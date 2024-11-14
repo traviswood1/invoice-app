@@ -1,0 +1,56 @@
+{
+  "customers": [
+    {
+      "id": "fb50",
+      "name": "jeannie",
+      "email": "jean@ie.com",
+      "address": "home"
+    },
+    {
+      "id": "cb02",
+      "name": "Travis Wood",
+      "email": "tww2013@gmail.com",
+      "address": "2743 Fair Ln, Denison, IA"
+    }
+  ],
+  "invoices": [
+    {
+      "id": "5dae",
+      "customerId": "cb02",
+      "invoiceNumber": "",
+      "projectName": "Invoice Application",
+      "date": "2024-11-13",
+      "dueDate": "2024-11-15",
+      "items": [
+        {
+          "description": "Labor",
+          "quantity": 1,
+          "rate": 1,
+          "amount": 1
+        }
+      ],
+      "total": 1,
+      "status": "pending",
+      "createdAt": "2024-11-14T00:16:12.922Z"
+    },
+    {
+      "id": "5105",
+      "customerId": "fb50",
+      "invoiceNumber": "",
+      "projectName": "Test",
+      "date": "2024-11-14",
+      "dueDate": "2024-11-23",
+      "items": [
+        {
+          "description": "Material",
+          "quantity": 1,
+          "rate": 3,
+          "amount": 3
+        }
+      ],
+      "total": 3,
+      "status": "paid",
+      "createdAt": "2024-11-14T00:16:50.088Z"
+    }
+  ]
+}

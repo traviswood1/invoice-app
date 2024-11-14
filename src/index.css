@@ -1,0 +1,14 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  border-bottom: 4px solid #333;
+  margin: 0;
+  padding: 20px;
+}
